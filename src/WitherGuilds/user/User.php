@@ -2,11 +2,18 @@
 
 namespace WitherGuilds\user;
 
+use pocketmine\player\Player;
+use pocketmine\Server;
+use WitherGuilds\api\bossbar\BossBar;
 use WitherGuilds\guild\Guild;
 
 class User {
 
-    public function __construct(private string $name, private ?Guild $guild = null) {
+    public function __construct(
+        private string $name,
+        private ?Guild $guild = null,
+        private BossBar $bar,
+        private bool $enter = false) {
     }
 
     /** @param Guild|null $guild */
@@ -22,5 +29,21 @@ class User {
     /** @return ?Guild */
     public function getGuild(): ?Guild{
         return $this->guild;
+    }
+
+    public function getPlayer(): ?Player {
+        return Server::getInstance()->getPlayerExact($this->name);
+    }
+
+    public function isEnter(): bool {
+        return $this->enter;
+    }
+
+    public function setEnter(bool $enter): void{
+        $this->enter = $enter;
+    }
+
+    public function getBar(): BossBar{
+        return $this->bar;
     }
 }

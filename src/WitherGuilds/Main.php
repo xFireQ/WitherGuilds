@@ -3,11 +3,13 @@
 namespace WitherGuilds;
 
 use pocketmine\plugin\PluginBase;
+use WitherGuilds\api\bossbar\PacketListener;
 use WitherGuilds\commands\CreateCommand;
 use WitherGuilds\commands\DeleteCommand;
 use WitherGuilds\commands\InfoCommand;
 use WitherGuilds\guild\GuildManager;
 use WitherGuilds\listeners\player\PlayerJoinListener;
+use WitherGuilds\listeners\player\PlayerMoveListener;
 use WitherGuilds\user\UserManager;
 
 class Main extends PluginBase {
@@ -48,7 +50,8 @@ class Main extends PluginBase {
         $pluginManager = $this->getServer()->getPluginManager();
 
         $listeners = [
-            new PlayerJoinListener()
+            new PlayerJoinListener(),
+            new PlayerMoveListener()
         ];
 
         foreach ($listeners as $listener) {
