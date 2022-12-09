@@ -7,6 +7,11 @@ class ConfigUtil {
     public const HEART_Y = 30;
     public const DEFAULT_SIZE = 30;
     public const MAX_SIZE = 80;
+    public const SHAPE_GUILD_XZ = 6;
+    public const SHAPE_GUILD_Y = 4;
+    
+    public const HEART_ID = 19;
+    public const HEART_META = 0;
 
     public const TITLE = "&l&6GILDIE";
     public const ENTERED_OWN_GUILD = "&aWszedles na teren swojej gildii!";

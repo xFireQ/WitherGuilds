@@ -8,6 +8,7 @@ use WitherGuilds\commands\CreateCommand;
 use WitherGuilds\commands\DeleteCommand;
 use WitherGuilds\commands\InfoCommand;
 use WitherGuilds\guild\GuildManager;
+use WitherGuilds\listeners\block\BlockBreakListener;
 use WitherGuilds\listeners\player\PlayerJoinListener;
 use WitherGuilds\listeners\player\PlayerMoveListener;
 use WitherGuilds\user\UserManager;
@@ -51,7 +52,8 @@ class Main extends PluginBase {
 
         $listeners = [
             new PlayerJoinListener(),
-            new PlayerMoveListener()
+            new PlayerMoveListener(),
+            new BlockBreakListener()
         ];
 
         foreach ($listeners as $listener) {

@@ -2,10 +2,12 @@
 
 namespace WitherGuilds\guild;
 
+use pocketmine\block\Block;
 use pocketmine\block\Transparent;
 use pocketmine\world\Position;
 use WitherGuilds\user\User;
 use WitherGuilds\utils\ConfigUtil;
+use WitherGuilds\utils\ShapesUtil;
 
 class GuildManager {
 
@@ -31,6 +33,10 @@ class GuildManager {
         $leader->setGuild($guild);
         
         $this->guilds[] = $guild;
+
+        ShapesUtil::create($heartPosition);
+
+        $player->teleport($heartPosition);
     }
 
 
@@ -38,6 +44,23 @@ class GuildManager {
         foreach ($this->guilds as $guild) {
             if ($guild->getTag() === $tag)
                 return true;
+        }
+        return false;
+    }
+
+    public function isHeart(Block $block): bool {
+        $position = $block->getPosition();
+
+        if ($block->getId() === ConfigUtil::HEART_ID && $block->getMeta() === ConfigUtil::HEART_META) {
+            foreach ($this->guilds as $guild) {
+                $heartPosition = $guild->getHeartPosition();
+                if ($heartPosition->getFloorX() === $position->getFloorX() &&
+                    $heartPosition->getFloorY() === $position->getFloorY() &&
+                    $heartPosition->getFloorZ() === $position->getFloorZ()
+                ) {
+                    return true;
+                }
+            }
         }
         return false;
     }
