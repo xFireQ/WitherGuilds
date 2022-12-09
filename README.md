@@ -1,7 +1,5 @@
 # WitherGuilds
 
-todo:
-
 ## Todo
 
 - [ ] dodac design gildii
