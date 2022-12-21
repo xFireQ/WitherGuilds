@@ -3,9 +3,9 @@
 ## Todo
 
 - [x] dodac design gildii
-- [ ] serce gildii
-- [ ] zapraszanie czlonkow
-- [ ] zablokowac niszczenie / stawianie blokow na cudzym terenie
-- [ ] pvp w gildii 
+- [x] serce gildii
+- [x] zapraszanie czlonkow
+- [x] zablokowac niszczenie / stawianie blokow na cudzym terenie
+- [x] pvp w gildii 
 - [ ] podbijanie
-- [ ] /wyrzucanie
+- [x] /wyrzucanie
