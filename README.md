@@ -2,7 +2,7 @@
 
 ## Todo
 
-- [ ] dodac design gildii
+- [x] dodac design gildii
 - [ ] serce gildii
 - [ ] zapraszanie czlonkow
 - [ ] zablokowac niszczenie / stawianie blokow na cudzym terenie
