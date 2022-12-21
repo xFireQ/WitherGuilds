@@ -6,9 +6,17 @@ use pocketmine\plugin\PluginBase;
 use WitherGuilds\api\bossbar\PacketListener;
 use WitherGuilds\commands\CreateCommand;
 use WitherGuilds\commands\DeleteCommand;
+use WitherGuilds\commands\FfCommand;
 use WitherGuilds\commands\InfoCommand;
+use WitherGuilds\commands\InvitePlayerCommand;
+use WitherGuilds\commands\JoinCommand;
+use WitherGuilds\commands\KickCommand;
+use WitherGuilds\commands\QuitCommand;
 use WitherGuilds\guild\GuildManager;
 use WitherGuilds\listeners\block\BlockBreakListener;
+use WitherGuilds\listeners\block\BlockPlaceListener;
+use WitherGuilds\listeners\player\PlayerInteractListener;
+use WitherGuilds\listeners\entity\EntityDamageListener;
 use WitherGuilds\listeners\player\PlayerJoinListener;
 use WitherGuilds\listeners\player\PlayerMoveListener;
 use WitherGuilds\user\UserManager;
@@ -40,7 +48,12 @@ class Main extends PluginBase {
         $commands = [
             new CreateCommand(),
             new InfoCommand(),
-            new DeleteCommand()
+            new DeleteCommand(),
+            new InvitePlayerCommand(),
+            new QuitCommand(),
+            new JoinCommand(),
+            new FfCommand(),
+            new KickCommand()
         ];
 
         foreach ($commands as $command)
@@ -53,7 +66,12 @@ class Main extends PluginBase {
         $listeners = [
             new PlayerJoinListener(),
             new PlayerMoveListener(),
-            new BlockBreakListener()
+            new PlayerInteractListener(),
+
+            new BlockBreakListener(),
+            new BlockPlaceListener(),
+
+            new EntityDamageListener()
         ];
 
         foreach ($listeners as $listener) {

@@ -9,6 +9,8 @@ class UserManager {
     /** @var User[]  */
     private array $users = [];
 
+    public static array $invitationUsers = [];
+
     public function createUser(string $nick): void {
         $this->users[] = new User($nick, null, new BossBar());
     }

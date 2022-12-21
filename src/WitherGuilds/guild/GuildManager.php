@@ -28,7 +28,7 @@ class GuildManager {
         $position1 = new Position($leaderPosition->getFloorX() + $arm, 0, $leaderPosition->getFloorZ() + $arm, $player->getWorld());
         $position2 = new Position($leaderPosition->getFloorX() - $arm, 0, $leaderPosition->getFloorZ() - $arm, $player->getWorld());
 
-        $guild = new Guild($tag, $name, $leader, $position1, $position2, $heartPosition, ConfigUtil::DEFAULT_SIZE);
+        $guild = new Guild($tag, $name, $leader, $position1, $position2, $heartPosition, ConfigUtil::DEFAULT_SIZE, [$leader->getName()], false);
 
         $leader->setGuild($guild);
         

@@ -8,6 +8,6 @@ class ChatUtil {
     }
 
     public static function format(string $message) : string {
-        return self::fixColors("&l&6WitherHC &r&8» &7".$message);
+        return self::fixColors("&r&8» &f".$message);
     }
 }

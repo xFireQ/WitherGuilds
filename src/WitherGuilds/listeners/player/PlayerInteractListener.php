@@ -1,23 +1,18 @@
 <?php
 
-namespace WitherGuilds\listeners\block;
+namespace WitherGuilds\listeners\player;
 
-use pocketmine\event\block\BlockBreakEvent;
+use pocketmine\event\block\BlockPlaceEvent;
 use pocketmine\event\Listener;
+use pocketmine\event\player\PlayerInteractEvent;
 use WitherGuilds\Main;
 use WitherGuilds\utils\ChatUtil;
-use WitherGuilds\utils\ConfigUtil;
 
-class BlockBreakListener implements Listener {
+class PlayerInteractListener implements Listener {
 
-    public function onBreakHeart(BlockBreakEvent $event) {
+    public function onBreakHeart(PlayerInteractEvent $event) {
         $block = $event->getBlock();
         $player = $event->getPlayer();
-
-        if (Main::getInstance()->getGuildManager()->isHeart($block)) {
-            $event->cancel();
-            $player->sendTip(ChatUtil::fixColors("&cNie mozesz niszczyc serca gildii!"));
-        }
 
         $guild = Main::getInstance()->getGuildManager()->getGuildAtPosition($block->getPosition());
 

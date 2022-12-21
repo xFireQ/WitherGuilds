@@ -40,7 +40,7 @@ class CreateCommand extends Command {
         $user = Main::getInstance()->getUserManager()->getUser($sender->getName());
 
         Main::getInstance()->getGuildManager()->createGuild($args[0], $args[1], $user);
-        Server::getInstance()->broadcastMessage(ChatUtil::format("Gracz &6{$sender->getName()} &7zalozyl gildie &6{$args[0]} &8- &6{$args[1]}&7."));
+        Server::getInstance()->broadcastMessage(ChatUtil::format("&6Gracz &f{$sender->getName()} &6zalozyl gildie &f{$args[0]} &8- &f{$args[1]}."));
 
     }
 }

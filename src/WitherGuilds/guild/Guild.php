@@ -13,7 +13,9 @@ class Guild {
         private Position $position1,
         private Position $position2,
         private Position $heartPosition,
-        private int $currentSize
+        private int $currentSize,
+        private array $members,
+        private bool $pvp
     ) {}
     public function getName(): string {
         return $this->name;
@@ -51,6 +53,14 @@ class Guild {
         return $this->maxPosition2;
     }
 
+    public function getMembers(): array{
+        return $this->members;
+    }
+
+    public function isEnablePvp(): bool {
+        return $this->pvp;
+    }
+
     public function isInPlot(Position $position, bool $max = false) : bool {
         if($max) {
             $position1 = $this->maxPosition1;
@@ -64,5 +74,20 @@ class Guild {
             $position->getFloorX() >= min($position1->getFloorX(), $position2->getFloorX()) &&
             $position->getFloorZ() <= max($position1->getFloorZ(), $position2->getFloorZ()) &&
             $position->getFloorZ() >= min($position1->getFloorZ(), $position2->getFloorZ());
+    }
+
+    public function addMember(string $nick) {
+        $this->members[] = $nick;
+    }
+
+    public function removeMember(string $nick) {
+        foreach ($this->members as $index => $member) {
+            if ($nick === $member)
+                unset($this->members[$index]);
+        }
+    }
+
+    public function setPvp(bool $pvp): void{
+        $this->pvp = $pvp;
     }
 }

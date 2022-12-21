@@ -34,7 +34,7 @@ class DeleteCommand extends Command {
             return;
         }
 
-        Server::getInstance()->broadcastMessage(ChatUtil::format("Gildia &6{$user->getGuild()->getTag()} &7zostala usunieta przez &6{$sender->getName()}&7."));
+        Server::getInstance()->broadcastMessage(ChatUtil::format("Gildia &6{$user->getGuild()->getTag()} &fzostala usunieta przez &6{$sender->getName()}&f."));
         Main::getInstance()->getGuildManager()->deleteGuild($user->getGuild());
 
     }

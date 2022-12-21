@@ -40,8 +40,9 @@ class InfoCommand extends Command {
 
     private function sendInfoGuild(Guild $guild, CommandSender $sender) : void {
         $sender->sendMessage(ChatUtil::fixColors("&8".str_repeat("=", 10)." [ &6&lWITHERHC &r&8] ".str_repeat("=", 10)));
-        $sender->sendMessage(ChatUtil::fixColors("&8» &7Gildia: &6".$guild->getTag()." &8- &6".$guild->getName()));
-        $sender->sendMessage(ChatUtil::fixColors("&8» &7Lider: &6".$guild->getLeader()->getName()));
+        $sender->sendMessage(ChatUtil::fixColors("&8» &fGildia: &6".$guild->getTag()." &8- &6".$guild->getName()));
+        $sender->sendMessage(ChatUtil::fixColors("&8» &fLider: &6".$guild->getLeader()->getName()));
+        $sender->sendMessage(ChatUtil::fixColors("&8» &fCzlonkowie: &8(&6".count($guild->getMembers())."&8): &6".implode("&f,&6 ", $guild->getMembers())));
         $sender->sendMessage(ChatUtil::fixColors("&8".str_repeat("=", 10)." [ &6&lWITHERHC &r&8] ".str_repeat("=", 10)));
     }
 }
