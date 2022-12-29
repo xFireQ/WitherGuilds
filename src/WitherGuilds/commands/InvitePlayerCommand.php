@@ -4,7 +4,6 @@ namespace WitherGuilds\commands;
 
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
-use pocketmine\Server;
 use WitherGuilds\Main;
 use WitherGuilds\user\UserManager;
 use WitherGuilds\utils\ChatUtil;

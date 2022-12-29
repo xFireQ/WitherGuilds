@@ -11,6 +11,6 @@ class PlayerJoinListener implements Listener {
     public function onJoin(PlayerJoinEvent $event) {
         $player = $event->getPlayer();
 
-        Main::getInstance()->getUserManager()->createUser($player->getName());
+        Main::getInstance()->getUserManager()->createUser($player->getName(), $player->getXuid());
     }
 }

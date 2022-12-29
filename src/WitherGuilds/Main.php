@@ -3,15 +3,22 @@
 namespace WitherGuilds;
 
 use pocketmine\plugin\PluginBase;
-use WitherGuilds\api\bossbar\PacketListener;
+use WitherGuilds\commands\AddPlotGuildCommand;
 use WitherGuilds\commands\CreateCommand;
 use WitherGuilds\commands\DeleteCommand;
+use WitherGuilds\commands\ExtensionCommand;
 use WitherGuilds\commands\FfCommand;
+use WitherGuilds\commands\GuildHelpCommand;
+use WitherGuilds\commands\HomeCommand;
 use WitherGuilds\commands\InfoCommand;
 use WitherGuilds\commands\InvitePlayerCommand;
+use WitherGuilds\commands\ItemsCommand;
 use WitherGuilds\commands\JoinCommand;
 use WitherGuilds\commands\KickCommand;
 use WitherGuilds\commands\QuitCommand;
+use WitherGuilds\commands\SetHomeCommand;
+use WitherGuilds\commands\WarCommand;
+use WitherGuilds\database\DbManager;
 use WitherGuilds\guild\GuildManager;
 use WitherGuilds\listeners\block\BlockBreakListener;
 use WitherGuilds\listeners\block\BlockPlaceListener;
@@ -40,6 +47,10 @@ class Main extends PluginBase {
 
         $this->registerEvents();
         $this->registerCommands();
+
+        DbManager::init();
+        $this->userManager->loadUsers();
+        $this->guildManager->load();
     }
 
     private function registerCommands() : void {
@@ -53,7 +64,14 @@ class Main extends PluginBase {
             new QuitCommand(),
             new JoinCommand(),
             new FfCommand(),
-            new KickCommand()
+            new KickCommand(),
+            new HomeCommand(),
+            new SetHomeCommand(),
+            new GuildHelpCommand(),
+            new WarCommand(),
+            new ItemsCommand(),
+            new AddPlotGuildCommand(),
+            new ExtensionCommand()
         ];
 
         foreach ($commands as $command)
@@ -87,5 +105,12 @@ class Main extends PluginBase {
     /** @return GuildManager */
     public function getGuildManager(): GuildManager {
         return $this->guildManager;
+    }
+
+    public function onDisable(): void {
+        $this->userManager->saveUsers();
+        $this->guildManager->save();
+
+        DbManager::getDb()->close();
     }
 }

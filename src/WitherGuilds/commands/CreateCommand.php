@@ -4,7 +4,6 @@ namespace WitherGuilds\commands;
 
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
-use pocketmine\lang\Translatable;
 use pocketmine\player\Player;
 use pocketmine\Server;
 use WitherGuilds\Main;

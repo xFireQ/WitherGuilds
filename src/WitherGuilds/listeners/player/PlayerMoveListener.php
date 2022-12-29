@@ -6,10 +6,21 @@ use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerMoveEvent;
 use WitherGuilds\api\bossbar\BossBar;
 use WitherGuilds\Main;
+use WitherGuilds\user\UserManager;
 use WitherGuilds\utils\ChatUtil;
 use WitherGuilds\utils\ConfigUtil;
 
 class PlayerMoveListener implements Listener {
+
+    public function teleportMove(PlayerMoveEvent $event) {
+        if($event->getFrom()->floor()->equals($event->getTo()->floor()))
+            return;
+
+        if (isset(UserManager::$teleportTasks[$event->getPlayer()->getName()])) {
+            $event->getPlayer()->sendTip(ChatUtil::fixColors("Teleportacja przerwana!"));
+            UserManager::$teleportTasks[$event->getPlayer()->getName()]->cancel();
+        }
+    }
 
     public function movePlayer(PlayerMoveEvent $event) {
         $player = $event->getPlayer();

@@ -15,8 +15,13 @@ class Guild {
         private Position $heartPosition,
         private int $currentSize,
         private array $members,
-        private bool $pvp
+        private bool $pvp,
+        private Position $basePosition,
+        private int $hp,
+        private string $expiryDate,
+        private string $conquerDate,
     ) {}
+
     public function getName(): string {
         return $this->name;
     }
@@ -45,6 +50,10 @@ class Guild {
         return $this->heartPosition;
     }
 
+    public function getBasePosition(): Position{
+        return $this->basePosition;
+    }
+
     public function getMaxPosition1(): Position {
         return $this->maxPosition1;
     }
@@ -57,18 +66,18 @@ class Guild {
         return $this->members;
     }
 
+    public function getHp(): int {
+        return $this->hp;
+    }
+
+
     public function isEnablePvp(): bool {
         return $this->pvp;
     }
 
-    public function isInPlot(Position $position, bool $max = false) : bool {
-        if($max) {
-            $position1 = $this->maxPosition1;
-            $position2 = $this->maxPosition2;
-        } else {
-            $position1 = $this->position1;
-            $position2 = $this->position2;
-        }
+    public function isInPlot(Position $position) : bool {
+        $position1 = $this->position1;
+        $position2 = $this->position2;
 
         return $position->getFloorX() <= max($position1->getFloorX(), $position2->getFloorX()) &&
             $position->getFloorX() >= min($position1->getFloorX(), $position2->getFloorX()) &&
@@ -90,4 +99,50 @@ class Guild {
     public function setPvp(bool $pvp): void{
         $this->pvp = $pvp;
     }
+
+    public function setBasePosition(Position $basePosition): void{
+        $this->basePosition = $basePosition;
+    }
+
+    public function setHP(int $hp): void{
+        $this->hp = $hp;
+    }
+
+    public function getExpiryDate() : string {
+        return $this->expiryDate;
+    }
+
+    public function setExpiryDate(string $date) : void {
+        $this->expiryDate = $date;
+    }
+
+    public function getConquerDate() : string {
+        return $this->conquerDate;
+    }
+
+    public function setConquerDate(string $date) : void {
+        $this->conquerDate = $date;
+    }
+
+    public function canConquer() : bool {
+        return time() > strtotime($this->getConquerDate());
+    }
+
+    public function canExpiry() : bool {
+        return time() > strtotime($this->getExpiryDate());
+    }
+
+    public function setPosition1(Position $position1): void{
+        $this->position1 = $position1;
+    }
+
+    public function setPosition2(Position $position2): void{
+        $this->position2 = $position2;
+    }
+
+    public function setCurrentSize(int $currentSize): void{
+        $this->currentSize = $currentSize;
+    }
+
+
 }

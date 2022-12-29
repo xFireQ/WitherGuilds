@@ -4,15 +4,17 @@ namespace WitherGuilds\commands;
 
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
+use pocketmine\item\VanillaItems;
 use pocketmine\player\Player;
 use pocketmine\Server;
 use WitherGuilds\Main;
 use WitherGuilds\utils\ChatUtil;
+use WitherGuilds\utils\ConfigUtil;
 
-class DeleteCommand extends Command {
+class ExtensionCommand extends Command {
 
     public function __construct(){
-        parent::__construct("delete", "Usuwa gildie", null, ["usun"]);
+        parent::__construct("przedluz", "Przedluza waznosc gildie", null, []);
     }
 
     public function execute(CommandSender $sender, string $commandLabel, array $args) {
@@ -28,13 +30,18 @@ class DeleteCommand extends Command {
             return;
         }
 
-        if ($user->getGuild()->getLeader()->getName() !== $sender->getName()) {
-            $sender->sendMessage(ChatUtil::format("Nie jestes liderem tej gildii!"));
+
+        if (!$sender->getInventory()->contains(VanillaItems::EMERALD()->setCount(64))) {
+            $sender->sendMessage(ChatUtil::format("Aby powiekszyc gildie potrzebujesz 64 emeraldow!"));
             return;
         }
 
-        Server::getInstance()->broadcastMessage(ChatUtil::format("Gildia &6{$user->getGuild()->getTag()} &fzostala usunieta przez &6{$sender->getName()}&f."));
-        Main::getInstance()->getGuildManager()->deleteGuild($user->getGuild());
+        $date = date_create($user->getGuild()->getExpiryDate());
+        date_add($date,date_interval_create_from_date_string("1 days"));
+        $date =  date_format($date,"d.m.Y H:i:s");
 
+        $user->getGuild()->setExpiryDate($date);
+        $sender->sendMessage(ChatUtil::format("Przedluzono waznosc gildii."));
+        $sender->getInventory()->removeItem(VanillaItems::EMERALD()->setCount(64));
     }
 }

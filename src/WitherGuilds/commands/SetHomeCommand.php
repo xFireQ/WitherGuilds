@@ -4,23 +4,16 @@ namespace WitherGuilds\commands;
 
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
-use pocketmine\player\Player;
-use pocketmine\Server;
 use WitherGuilds\Main;
 use WitherGuilds\utils\ChatUtil;
 
-class DeleteCommand extends Command {
+class SetHomeCommand extends Command {
 
     public function __construct(){
-        parent::__construct("delete", "Usuwa gildie", null, ["usun"]);
+        parent::__construct("ustawbaze", "Ustawia baze gildii", null, ["ustawdom"]);
     }
 
     public function execute(CommandSender $sender, string $commandLabel, array $args) {
-        if (!$sender instanceof Player) {
-            $sender->sendMessage(ChatUtil::format("Nie mozesz uzyc tej komendy tutaj!"));
-            return;
-        }
-
         $user = Main::getInstance()->getUserManager()->getUser($sender->getName());
 
         if ($user->getGuild() === null) {
@@ -29,12 +22,11 @@ class DeleteCommand extends Command {
         }
 
         if ($user->getGuild()->getLeader()->getName() !== $sender->getName()) {
-            $sender->sendMessage(ChatUtil::format("Nie jestes liderem tej gildii!"));
+            $sender->sendMessage(ChatUtil::format("Nie jesteds liderem tej gildii!"));
             return;
         }
 
-        Server::getInstance()->broadcastMessage(ChatUtil::format("Gildia &6{$user->getGuild()->getTag()} &fzostala usunieta przez &6{$sender->getName()}&f."));
-        Main::getInstance()->getGuildManager()->deleteGuild($user->getGuild());
-
+        $user->getGuild()->setBasePosition($sender->getPosition());
+        $sender->sendMessage(ChatUtil::format("Ustawiono baze gildii!"));
     }
 }

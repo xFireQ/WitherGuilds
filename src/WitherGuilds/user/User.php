@@ -11,6 +11,7 @@ class User {
 
     public function __construct(
         private string $name,
+        private string $xuid,
         private ?Guild $guild = null,
         private BossBar $bar,
         private bool $enter = false) {
@@ -45,5 +46,13 @@ class User {
 
     public function getBar(): BossBar{
         return $this->bar;
+    }
+
+    /**
+     * @return string
+     */
+    public function getXuid(): string
+    {
+        return $this->xuid;
     }
 }
